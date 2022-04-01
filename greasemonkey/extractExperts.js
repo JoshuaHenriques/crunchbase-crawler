@@ -67,9 +67,13 @@ let loopCount = data.count/10
 let expertsList = []
 let last = data.entities[9].uuid
 
-console.log(`req0 data: ${data.entities}`)
+// console.log(`req0 data: ${data.entities}`)
 data.entities.forEach((expert) => {
-    expertsList.push(expert)
+    expertsList.push({
+        name: expert.properties.name,
+        linkedIn: expert.properties.linkedin,
+        jobDepartments: expert.properties.job_departments
+    })
 })
 
 const loopp = async () => {
@@ -98,28 +102,37 @@ const loopp = async () => {
         // console.log(`req2 data: ${data2.entities}`)
         last = data2.entities[9].uuid
         data2.entities.forEach((expert) => {
-            expertsList.push(expert)
+            expertsList.push({
+                name: expert.properties.name,
+                linkedIn: expert.properties.linkedin,
+                jobDepartments: expert.properties.job_departments
+            })
         })
         // console.log(last2)
     } 
 }
 
-loopp()
+// loopp()
 // console.log(expertsList)
+const dlFile = () => {
+    let dataString = JSON.stringify(expertsList, undefined, 4)
 
-let dataString = JSON.stringify(expertsList, undefined, 4)
+    var blob = new Blob([dataString], {
+        type: 'text/json'
+    }),
+    e = document.createEvent('MouseEvents'),
+    a = document.createElement('a')
+    
+    a.download = "experts.txt"
+    a.href = window.URL.createObjectURL(blob)
+    a.dataset.downloadurl = ['text/json', a.download, a.href].join(':')
+    e.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null)
+    a.dispatchEvent(e)
+}
 
-var blob = new Blob([dataString], {
-    type: 'text/json'
-}),
-e = document.createEvent('MouseEvents'),
-a = document.createElement('a')
+// loopp().then(() => {dlFile})
 
-a.download = "experts.txt"
-a.href = window.URL.createObjectURL(blob)
-a.dataset.downloadurl = ['text/json', a.download, a.href].join(':')
-e.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null)
-a.dispatchEvent(e)
+// setTimeout(dlFile, 10000)
 // Actual Code
 
 let req2 = await fetch("https://www.crunchbase.com/v4/data/searches/contacts?source=profile-contacts-card", {
