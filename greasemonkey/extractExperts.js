@@ -38,6 +38,7 @@ let req1t = await fetch("https://www.crunchbase.com/v4/data/searches/contacts?so
     "mode": "cors"
 });
 
+// Actual Code
 let company = "amazon"
 let companyUUID = "05554f65-6aa9-4dd1-6271-8ce2d60f10c4"
 
@@ -103,11 +104,23 @@ const loopp = async () => {
     } 
 }
 
-// Loop Logic
 loopp()
+// console.log(expertsList)
 
-console.log(expertsList)
-// Loop Logic
+let dataString = JSON.stringify(expertsList, undefined, 4)
+
+var blob = new Blob([dataString], {
+    type: 'text/json'
+}),
+e = document.createEvent('MouseEvents'),
+a = document.createElement('a')
+
+a.download = "experts.txt"
+a.href = window.URL.createObjectURL(blob)
+a.dataset.downloadurl = ['text/json', a.download, a.href].join(':')
+e.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null)
+a.dispatchEvent(e)
+// Actual Code
 
 let req2 = await fetch("https://www.crunchbase.com/v4/data/searches/contacts?source=profile-contacts-card", {
     "credentials": "include",
