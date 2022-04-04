@@ -34,6 +34,23 @@ const downloadExpertList = () => {
     a.dispatchEvent(e)
 }
 
+let sendToDB = async () => {
+    const res = await fetch('http://localhost:4000/experts', {
+				method: "POST",
+				body: JSON.stringify({
+                    company: {
+                        id: companyUUID,
+                        name: company,
+                    },
+					experts: expertsList
+				}),
+				headers: {
+				//"Access-Control-Allow-Origin": "*",
+				"Content-type": "application/json"
+				},
+	})
+}
+
 const fetchTheRest = async (last, cnt) => {
     // promiseArray = []
     // const withTimeout = (millis, promise) => {

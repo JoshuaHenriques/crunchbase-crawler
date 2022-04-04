@@ -9,7 +9,7 @@ services:
       # To be replaced once ready for deployment
       POSTGRES_PASSWORD: example
     ports:
-      - "5432:5432"
+      - "5433:5432"
     expose:
-      - "5432"
+      - "5433"
     container_name: db_container
