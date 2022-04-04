@@ -26,3 +26,11 @@ export const insertExpert = async (expert: Expert, company: string) => {
     ]
   )
 }
+
+export const getCompaniesDB = async () => {
+  return await db.any("SELECT * FROM company")
+}
+
+export const getExpertsDB = async (company: any) => {
+  return await db.any("SELECT * FROM expert WHERE company = $1", [company])
+}

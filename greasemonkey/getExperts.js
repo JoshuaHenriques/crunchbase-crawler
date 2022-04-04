@@ -34,7 +34,7 @@ const downloadExpertList = () => {
 }
 
 const sendToDB = async () => {
-    const res = await fetch('http://localhost:4000/experts', {
+    const res = await fetch('http://localhost:4000/insertExperts', {
 				method: "POST",
 				body: JSON.stringify({
                     company: {

@@ -10,12 +10,13 @@ create table if not exists expert (
     linkedin        varchar(255),
     job_title       varchar(255),
     job_departments text[],
-    company         varchar(255)
+    company         varchar(255),
+    notes           text
 );
 
 create table if not exists company (
     created_at      timestamp       default current_timestamp,
     updated_at      timestamp        default current_timestamp,
-    id              uuid            not null,
-    name            varchar(255)    not null
+    id              uuid            not null primary key,
+    name            varchar(255)    not null unique
 );
