@@ -7,7 +7,6 @@ let companyUUID = "05554f65-6aa9-4dd1-6271-8ce2d60f10c4"
 let expertsList = []
 
 const pushToExpertList = (data) => {
-    //console.log("I'm called")
     data.entities.forEach((expert) => {
         expertsList.push({
             name: expert.properties.name,

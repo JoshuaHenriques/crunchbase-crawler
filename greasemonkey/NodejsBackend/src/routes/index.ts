@@ -1,9 +1,12 @@
 import { Router } from "express"
-import { experts } from "./experts/experts"
+import { insertExperts } from "./endpoints/insertExperts"
+import { getExperts } from "./endpoints/getExperts"
 
 
 const route = Router()
 
-route.post("/experts", experts)
+route.post("/experts", insertExperts)
+
+route.get("/company", getExperts)
 
 export default route
