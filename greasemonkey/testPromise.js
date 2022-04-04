@@ -7,14 +7,31 @@ const pushToExpertList = (data) => {
     data.entities.forEach((expert) => {
         expertsList.push({
             name: expert.properties.name,
-            linkedIn: expert.properties.linkedin,
-            jobDepartments: expert.properties.job_departments
+            jobTitle: expert.related_entities["contact_item.has_contact_item.forward"].entities[0].properties.job_title,
+            jobDepartments: expert.properties.job_departments,
+            linkedIn: expert.properties.linkedin
         })
     })
 }
 
+const downloadExpertList = () => {
+    let dataString = JSON.stringify(expertsList, undefined, 4)
+
+    var blob = new Blob([dataString], {
+        type: 'text/json'
+    }),
+        e = document.createEvent('MouseEvents'),
+        a = document.createElement('a')
+
+    a.download = "experts.json"
+    a.href = window.URL.createObjectURL(blob)
+    a.dataset.downloadurl = ['text/json', a.download, a.href].join(':')
+    e.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null)
+    a.dispatchEvent(e)
+}
+
 const fetchTheRest = async (last, cnt) => {
-    promiseArray = []
+    // promiseArray = []
     // const withTimeout = (millis, promise) => {
     //     const timeout = new Promise((resolve, reject) =>
     //         setTimeout(
@@ -25,7 +42,7 @@ const fetchTheRest = async (last, cnt) => {
     //         timeout
     //     ]);
     // }
-    for (let i = 0; i < cnt; i++) {
+    for (let i = 0; i < cnt + 1; i++) {
         // promiseArray.push(withTimeout(500, new Promise(async (resolve, reject) => {
         //     let fetchData = await fetch("https://www.crunchbase.com/v4/data/searches/contacts?source=profile-contacts-card", {
         //         "credentials": "include",
@@ -53,7 +70,7 @@ const fetchTheRest = async (last, cnt) => {
         //     resolve()
         // })))}
 
-        promiseArray.push(new Promise(async (resolve, reject) => {
+        // promiseArray.push(new Promise(async (resolve, reject) => {
             let fetchData = await fetch("https://www.crunchbase.com/v4/data/searches/contacts?source=profile-contacts-card", {
                 "credentials": "include",
                 "headers": {
@@ -76,29 +93,15 @@ const fetchTheRest = async (last, cnt) => {
             // console.log("promise array")
             let data = await fetchData.json()
             last = data.entities[9].uuid
+            console.log(last)
             pushToExpertList(data)
-            resolve()
-        }))
+            // resolve()
+        // }))
         //console.log(`the cnt is : ${cnt}`)       
     }
-    return promiseArray
-    //downloadExpertList()
-}
-
-const downloadExpertList = () => {
-    let dataString = JSON.stringify(expertsList, undefined, 4)
-
-    var blob = new Blob([dataString], {
-        type: 'text/json'
-    }),
-        e = document.createEvent('MouseEvents'),
-        a = document.createElement('a')
-
-    a.download = "experts.txt"
-    a.href = window.URL.createObjectURL(blob)
-    a.dataset.downloadurl = ['text/json', a.download, a.href].join(':')
-    e.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null)
-    a.dispatchEvent(e)
+    // console.log("Am I called")
+    // downloadExpertList()
+    return "done"
 }
 
 const grabExperts = async () => {
@@ -127,16 +130,21 @@ const grabExperts = async () => {
     let loopCnt = data.count / 10
     pushToExpertList(data)
 
-    let promises = fetchTheRest(lastPersonID, loopCnt)
-    console.log(promises)
-    console.log(expertsList)
+    let done = await fetchTheRest(lastPersonID, loopCnt)
+    // if (done == "done") downloadExpertList()
+    // while(done != "done") {
+    //     console.log(done)
+    // }
+    // if (done == "done") downloadExpertList()
+    // console.log(promises)
+    // console.log(expertsList)
     // this alone without setTimeout calls then() too fast
-    promises.then(() => {
-        setTimeout(() => {
+    // promises.then(() => {
+    //     setTimeout(() => {
             //console.log("please")
-            downloadExpertList()
-        }, 5000)
-    })
+            // downloadExpertList()
+    //     }, 5000)
+    // })
 
     // doesnt work for some reason
     // console.log("getting there")
