@@ -34,7 +34,7 @@ const downloadExpertList = () => {
     a.dispatchEvent(e)
 }
 
-let sendToDB = async () => {
+const sendToDB = async () => {
     const res = await fetch('http://localhost:4000/experts', {
 				method: "POST",
 				body: JSON.stringify({
