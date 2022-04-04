@@ -1,3 +1,7 @@
+// let company = "google"
+// let companyUUID = "6acfa7da-1dbd-936e-d985-cf07a1b27711"
+// let company = "farmart"
+// let companyUUID = "c30e2e2c-2873-ef6f-c5f1-a2874f20f66f"
 let company = "amazon"
 let companyUUID = "05554f65-6aa9-4dd1-6271-8ce2d60f10c4"
 let expertsList = []
@@ -125,6 +129,7 @@ const grabExperts = async () => {
         "mode": "cors"
     })
 
+    // make checks to see if less than 10 experts
     let data = await fetchData.json()
     let lastPersonID = data.entities[9].uuid
     let loopCnt = data.count / 10
