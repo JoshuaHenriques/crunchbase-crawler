@@ -1,6 +1,7 @@
 export interface Expert {
-	firstName: string,
-	lastName: string,
-	phone: string,
-	email: string
+	name: string,
+	job_title: string,
+	job_departments: string[],
+	linkedin: string,
+	company: string
 }

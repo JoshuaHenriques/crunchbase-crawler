@@ -2,21 +2,21 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import { ScrapeForm } from "./components/ScrapeForm/ScrapeForm";
 import { Header } from "./components/Header/Header";
-import { ArticlesContext } from "./interfaces/ArticlesContextData";
-import { ArticleList } from "./components/Articles/ArticleList";
-import { useArticlesContextValue } from "./hooks/useArticlesContextValue";
+import { ExpertsContext } from "./interfaces/ExpertsContextData";
+import { ExpertList } from "./components/Articles/ExpertList";
+import { useExpertsContextValue } from "./hooks/useExpertsContextValue";
 
 export const App = () => {
-  const articlesContextValue = useArticlesContextValue()
+  const expertsContextValue = useExpertsContextValue()
 
   return (
-    <ArticlesContext.Provider value={articlesContextValue}>
+    <ExpertsContext.Provider value={expertsContextValue}>
       <Header />
       <ScrapeForm />
-      <ArticleList />
+      <ExpertList />
       {/* <Pagination nextPage={nextPage} prevPage={prevPage} /> */}
       {/* <Footer /> */}
-    </ArticlesContext.Provider>
+    </ExpertsContext.Provider>
   );
 };
 

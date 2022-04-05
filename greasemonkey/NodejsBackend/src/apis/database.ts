@@ -32,5 +32,5 @@ export const getCompaniesDB = async () => {
 }
 
 export const getExpertsDB = async (company: any) => {
-  return await db.any("SELECT * FROM expert WHERE company = $1", [company])
+  return await db.any("SELECT name, job_title, job_departments, linkedin, company FROM expert WHERE company = $1", [company])
 }
