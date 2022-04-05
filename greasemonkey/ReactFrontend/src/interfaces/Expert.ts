@@ -3,5 +3,6 @@ export interface Expert {
 	job_title: string,
 	job_departments: string[],
 	linkedin: string,
-	company: string
+	company: string,
+	notes?: string
 }

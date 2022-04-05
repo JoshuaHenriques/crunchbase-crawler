@@ -17,8 +17,7 @@ export const useExpertsContextValue = (): ExpertsContextData => {
 				},
 			})
 			const data = await res.json()
-			// console.log(data.experts[1])
-			
+			console.log(data)
 			setExperts(data.experts)
 		} catch(e) {
 			console.log(e)

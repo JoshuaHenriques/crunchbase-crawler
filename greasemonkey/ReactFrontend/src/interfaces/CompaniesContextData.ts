@@ -3,7 +3,7 @@ import { Company } from "./Company"
 
 export interface CompaniesContextData {
 	companies: Company[]
-	getCompanies: (urls: string) => void
+	getCompanies: () => void
 }
 
 export const companiesContextDefaultValue: CompaniesContextData = {
