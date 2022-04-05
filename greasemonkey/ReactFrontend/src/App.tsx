@@ -17,11 +17,10 @@ export const App = () => {
   return (
     <ExpertsContext.Provider value={expertsContextValue}>
       <CompaniesContext.Provider value={companiesContextValue}>
-      <Header />
-      <Selection />
-      <ExpertList />
+        <Header />
+        <Selection />
+        <ExpertList />
       {/* <Pagination nextPage={nextPage} prevPage={prevPage} /> */}
-      {/* <Footer /> */}
       </CompaniesContext.Provider>
     </ExpertsContext.Provider>
   );

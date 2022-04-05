@@ -8,9 +8,13 @@ export const ExpertList = () => {
 	const { experts } = useContext(ExpertsContext)
 	return (
 		<section>
-			<div className="container d-flex justify-content-center">
-				<div className="experts">
-				{ experts.map((expert: ExpertType) => (<Expert key={expert.linkedin} expert={ expert }/>)) }
+			<div className="container">
+				<div className="row">
+				{ experts.map((expert: ExpertType) => (
+					<div className="col-4"  key={expert.linkedin}>
+						<Expert key={expert.linkedin} expert={ expert }/>
+					</div>
+					)) }
 				</div>
 			</div>
 		</section>
