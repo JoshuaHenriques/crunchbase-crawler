@@ -2,8 +2,23 @@
 // let companyUUID = "6acfa7da-1dbd-936e-d985-cf07a1b27711"
 // let company = "farmart"
 // let companyUUID = "c30e2e2c-2873-ef6f-c5f1-a2874f20f66f"
-let company = "amazon"
-let companyUUID = "05554f65-6aa9-4dd1-6271-8ce2d60f10c4"
+// let company = "amazon"
+// let companyUUID = "05554f65-6aa9-4dd1-6271-8ce2d60f10c4"
+// let company = "apollo-global-management-llc"
+// let companyUUID = "84c5275e-2a2f-e43a-1ff1-1a5f7c79975f"
+// let company = "nvidia"
+// let companyUUID = "ee17319e-f5ee-9c9a-6500-edf82b4fbf05"
+// let company = "grofers-trusted-delivery-partner"
+// let companyUUID = "79ec9579-eca9-0029-e080-a43ebfea7389"
+// let company = "intel"
+// let companyUUID = "1e4f199c-363b-451b-a164-f94571075ee5"
+// let company = "tencent"
+// let companyUUID = "3cae090b-ed2d-95f8-79a9-e32ca480258f"
+// let company = "apple"
+// let companyUUID = "7063d087-96b8-2cc1-ee88-c221288acc2a"
+// let company = "angellist"
+// let companyUUID = "55d02c5a-f0d6-f70f-1a04-832633cfce2a"
+
 let expertsList = []
 
 const pushToExpertList = (data) => {
@@ -50,7 +65,7 @@ const sendToDB = async () => {
 }
 
 const fetchTheRest = async (last, cnt) => {
-    for (let i = 0; i < cnt + 1; i++) {
+    for (let i = 0; i < cnt; i++) {
         let fetchData = await fetch("https://www.crunchbase.com/v4/data/searches/contacts?source=profile-contacts-card", {
             "credentials": "include",
             "headers": {
@@ -71,8 +86,12 @@ const fetchTheRest = async (last, cnt) => {
             "mode": "cors"
         })
         let data = await fetchData.json()
+        if (data.entities.length < 10) {
+            pushToExpertList(data)
+            return
+        }
         last = data.entities[9].uuid
-        console.log(last)
+        console.log(i)
         pushToExpertList(data)
     }
 }
@@ -98,13 +117,17 @@ const grabExperts = async () => {
         "mode": "cors"
     })
 
-    // make checks to see if less than 10 experts
     let data = await fetchData.json()
-    let lastPersonID = data.entities[9].uuid
-    let loopCnt = data.count / 10
-    pushToExpertList(data)
+    if (data.entities.length < 10) {
+        pushToExpertList(data)
+        return
+    } else {
+        let lastPersonID = data.entities[9].uuid
+        let loopCnt = Math.ceil(data.count / 10)
 
-    await fetchTheRest(lastPersonID, loopCnt)
+        pushToExpertList(data)
+        await fetchTheRest(lastPersonID, loopCnt)
+    }    
 }
 
 grabExperts()

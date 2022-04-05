@@ -7,7 +7,7 @@ create table if not exists expert (
     name            varchar(255)    not null,
     phone_number    varchar(10),
     email           varchar(255),
-    linkedin        varchar(255),
+    linkedin        varchar(255)    unique,
     job_title       varchar(255),
     job_departments text[],
     company         varchar(255),
