@@ -120,15 +120,17 @@ const grabExperts = async () => {
     }    
 }
 
-const test = () => {
+const done = () => {
     console.log(expertsList)
     alert("done")
 }
 
 const run = async () => {
     await grabExperts()
-    test()
+    sendToDB()
+    done()
 }
+
 run()
 // await grabExperts()
 // test()
