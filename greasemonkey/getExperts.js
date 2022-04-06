@@ -19,6 +19,12 @@
 // let company = "angellist"
 // let companyUUID = "55d02c5a-f0d6-f70f-1a04-832633cfce2a"
 
+// regex for uuid: /semrush_summary&q;:{&q;identifier&q;:{&q;uuid&q;:&q;(\w{8}(-\w{4}){3}-\w{12}?)/g
+// uuid: document.querySelector("#client-app-state").textContent.match(/semrush_summary&q;:{&q;identifier&q;:{&q;uuid&q;:&q;(\w{8}(-\w{4}){3}-\w{12}?)/g)[0].split(";")[6]
+// company: window.location.pathname.split("/")[2] or document.URL.split("/")[4]
+let company = document.URL.split("/")[4]
+let companyUUID = document.querySelector("#client-app-state").textContent.match(/semrush_summary&q;:{&q;identifier&q;:{&q;uuid&q;:&q;(\w{8}(-\w{4}){3}-\w{12}?)/g)[0].split(";")[6]
+
 let expertsList = []
 
 const pushToExpertList = (data) => {
@@ -30,22 +36,6 @@ const pushToExpertList = (data) => {
             linkedIn: expert.properties.linkedin
         })
     })
-}
-
-const downloadExpertList = () => {
-    let dataString = JSON.stringify(expertsList, undefined, 4)
-
-    var blob = new Blob([dataString], {
-        type: 'text/json'
-    }),
-        e = document.createEvent('MouseEvents'),
-        a = document.createElement('a')
-
-    a.download = "experts.json"
-    a.href = window.URL.createObjectURL(blob)
-    a.dataset.downloadurl = ['text/json', a.download, a.href].join(':')
-    e.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null)
-    a.dispatchEvent(e)
 }
 
 const sendToDB = async () => {
@@ -130,4 +120,10 @@ const grabExperts = async () => {
     }    
 }
 
-grabExperts()
+const test = async () => {
+    console.log(expertsList)
+}
+
+await grabExperts()
+await test()
+// await sendToDB()
