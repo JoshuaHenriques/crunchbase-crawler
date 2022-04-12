@@ -24,7 +24,7 @@ export const Selection = () => {
         <form onSubmit={(e) => {
             e.preventDefault()
             console.log(company)
-            if(company != "Select Company") {
+            if(company !== "Select Company") {
               handleGetExpert(company)
             } 
             }}>          

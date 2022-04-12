@@ -7,8 +7,6 @@ import { ExpertList } from "./components/Articles/ExpertList";
 import { useExpertsContextValue } from "./hooks/useExpertsContextValue";
 import { useCompaniesContextValue } from "./hooks/useCompaniesContextValue";
 import { CompaniesContext } from "./interfaces/CompaniesContextData";
-import { useEffect } from "react";
-import { useCompaniesManagement } from "./hooks/useCompaniesManagement";
 
 export const App = () => {
   const expertsContextValue = useExpertsContextValue()
