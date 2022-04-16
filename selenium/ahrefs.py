@@ -76,7 +76,7 @@ WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, ".c
 # driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div/div/span/div[3]/div").click()
 # driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div/div/span/div[4]").click()
 
-sleep(1)
+# sleep(1)
 
 # WebDriverWait(driver, 10).until(EC.frame_to_be_available_and_switch_to_it((By.CSS_SELECTOR,"#recaptcha-anchor")))
 # WebDriverWait(driver, 10).until(EC.frame_to_be_available_and_switch_to_it((By.ID,"recaptcha-anchor")))
