@@ -1,26 +1,3 @@
 Scrapy-Splash + Splash
 Scrapy-Selenium
 Selenium
-
-    Yesterday:
-        Finished Frontend for the most part
-            Add a search for the names in the currect list that's already been fetched
-            Add a button on each expert card that lets you edit the notes and other fields of that expert
-            Search by company instead of select menu
-            rename company names for better searching
-        Fixed some bugs on the script
-        Populated the database
-    Today:
-        Figure out ways to automate the script more
-        Edit notes and expert fields through frontend
-
-script:
-    sendToDB() right after extraction
-
-frontend:
-    pagination
-
-backend:
-    to check if expert is already in list
-database:
-    https://stackoverflow.com/questions/2362871/postgresql-current-timestamp-on-update
